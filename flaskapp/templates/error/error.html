@@ -3,5 +3,9 @@
 <h2>
     Flask App
 </h2>
+{% if description %}
+{{description}}
+{% else %}
 <div>Sorry, there was an error. Code {{error_code}}</div>
+{% endif %}
 {% endblock %}

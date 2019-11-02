@@ -4,11 +4,16 @@
     <meta charset="UTF-8" />
     <meta http-equiv="Content-Language" content="en" />
     <!--meta tags go here-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Flask App Base</title>
     <!--app-wide style sheets go here-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" href="{{  url_for('static', filename='css/materialize.min.css') }}"  media="screen,projection"/>
+    <link rel="stylesheet" href="{{  url_for('static', filename='css/fonts.css') }}" type="text/css" charset="utf-8" />
+    <link rel="stylesheet" href="{{  url_for('static', filename='css/styles.css') }}" type="text/css" charset="utf-8" />
 </head>
 <body>
     {% block content %} {% endblock %}
-    <!--app-wide scripts go here-->
+    <script type="text/javascript" src="{{  url_for('static', filename='js/materialize.min.js') }}"></script>
   </body>
 </html>

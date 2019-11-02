@@ -3,7 +3,7 @@ services:
   db:
     image: "postgres:12"
     volumes:
-      - "database:/var/lib/postgresql/data"
+      - "busttimes_database:/var/lib/postgresql/data"
     env_file:
       - env_file
     networks:
@@ -25,4 +25,4 @@ networks:
   db_nw:
     driver: bridge
 volumes:
-  database:
+  busttimes_database:

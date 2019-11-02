@@ -1,12 +1,22 @@
 {% extends 'boilerplate.html' %} {% block content %}
-<h2>
-    Flask App
+<h4>
+    {% if response[0] is not none %}
+        {{response[0]['stationName']}}
+    {% endif %}
 </h2>
-{{response}}
 {% for item in response %}
-<p>Type = {{item['modeName']}}</p>
-<p>Line = {{item['lineName']}}</p>
-<p>Line = {{item['destinationName']}}</p>
-<p>Arrival = {{item['expectedArrival']}}</p>
+<div class="data-wrapper">
+    <div class="line-wrapper">
+        <div class="data-left">
+            {{item['lineName']}}
+        </div>
+        <div class="data-middle">
+            {{item['destinationName']}}
+        </div>
+        <div class="data-right">
+            {{item['expectedArrival']}}
+        </div>
+    </div>
+</div>
 {% endfor %}
 {% endblock %}

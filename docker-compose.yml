@@ -1,0 +1,28 @@
+version: '3'
+services:
+  db:
+    image: "postgres:12"
+    volumes:
+      - "database:/var/lib/postgresql/data"
+    env_file:
+      - env_file
+    networks:
+      - db_nw
+  flaskapp:
+    build: .
+    env_file:
+      - env_file
+    ports:
+      - "8080:5000"
+    volumes:
+      - .:/home/flaskapp
+      - ./migrations:/home/flaskapp/migrations
+    networks:
+      - db_nw
+    depends_on:
+      - db
+networks:
+  db_nw:
+    driver: bridge
+volumes:
+  database:

@@ -1,0 +1,6 @@
+POSTGRES_USER=postgres
+POSTGRES_PASSWORD=changeme
+POSTGRES_DB=flaskapp_db
+DEV_DATABASE_URL=postgres://postgres:changeme@db/flaskapp_db
+FLASK_CONFIG=dev
+SECRET_KEY=changeme

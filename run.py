@@ -1,6 +1,7 @@
 import os
 from flask_migrate import Migrate
 from flaskapp import create_app, db
+from flaskapp.models import Request, ExpectedArrival
 
 app = create_app(os.getenv("FLASK_CONFIG") or "default")
 migrate = Migrate(app, db)

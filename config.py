@@ -8,6 +8,8 @@ class Config:
     """
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     SECRET_KEY = os.environ.get("SECRET_KEY")
+    TFL_APP_ID = os.environ.get("TFL_APP_ID")
+    TFL_API_KEY = os.environ.get("TFL_API_KEY")
 
 
 class DevConfig(Config):

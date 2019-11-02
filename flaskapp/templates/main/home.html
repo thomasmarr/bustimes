@@ -1,11 +1,12 @@
 {% extends 'boilerplate.html' %} {% block content %}
-<h4>
-    {% if response[0] is not none %}
-        {{response[0]['stationName']}}
-    {% endif %}
-</h2>
-{% for item in response %}
+<div class="header"><h4>
+Bus Times
+{% if response[0] is not none %}
+for {{response[0]['stationName']}}
+{% endif %}
+</h2></div>
 <div class="data-wrapper">
+    {% for item in response %}
     <div class="line-wrapper">
         <div class="data-left">
             {{item['lineName']}}
@@ -14,9 +15,9 @@
             {{item['destinationName']}}
         </div>
         <div class="data-right">
-            {{item['expectedArrival']}}
+            {{item['expectedArrivalString']}}
         </div>
     </div>
+    {% endfor %}
 </div>
-{% endfor %}
 {% endblock %}

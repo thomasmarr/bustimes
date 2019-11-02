@@ -3,4 +3,10 @@
     Flask App
 </h2>
 {{response}}
+{% for item in response %}
+<p>Type = {{item['modeName']}}</p>
+<p>Line = {{item['lineName']}}</p>
+<p>Line = {{item['destinationName']}}</p>
+<p>Arrival = {{item['expectedArrival']}}</p>
+{% endfor %}
 {% endblock %}

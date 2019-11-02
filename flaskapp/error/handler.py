@@ -8,4 +8,8 @@ def error_handler(error):
         error_code = error.code
     else:
         error_code=500
-    return render_template('error/error.html', error_code = error_code)
+    try:
+        description = error.description
+    except AttributeError:
+        description = None
+    return render_template('error/error.html', error_code = error_code, description = description)

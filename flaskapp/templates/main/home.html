@@ -1,11 +1,12 @@
 {% extends 'boilerplate.html' %} {% block content %}
 <div class="header"><h4>
 Bus Times
-{% if response[0] is not none %}
+{% if response|length > 0 %}
 for {{response[0]['stationName']}}
 {% endif %}
 </h2></div>
 <div class="data-wrapper">
+    {% if response|length > 0 %}
     {% for item in response %}
     <div class="line-wrapper">
         <div class="data-left">
@@ -19,5 +20,10 @@ for {{response[0]['stationName']}}
         </div>
     </div>
     {% endfor %}
+    {% else %}
+    <div class="data-middle">
+        No data...
+    </div>
+    {% endif %}
 </div>
 {% endblock %}

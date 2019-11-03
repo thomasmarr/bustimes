@@ -8,9 +8,9 @@ class TfLAPICalls(object):
         API_KEY = current_app.config['TFL_API_KEY']
         self.keys = {'app_id':APP_ID, 'app_key':API_KEY} 
     
-    def getStopLiveArrivals(self):
+    def getStopLiveArrivals(self, naptan_id):
         try:
-            times = requests.get('https://api.tfl.gov.uk/StopPoint/490009333W/arrivals', params=self.keys)
+            times = requests.get(f'https://api.tfl.gov.uk/StopPoint/{naptan_id}/arrivals', params=self.keys)
             times.raise_for_status()
             return times.json()
         except requests.exceptions.HTTPError as e:

@@ -7,6 +7,14 @@ body{
     text-align:center;
 }
 
+.subheader-wrapper{
+    font-size: 20px;
+    color: papayawhip;
+    margin: auto;
+    max-width: 650px;
+    padding: 5px;
+}
+
 .data-wrapper{
     margin: auto;
     font-family: 'bpdotsbold', Arial, sans-serif;
@@ -14,6 +22,7 @@ body{
     color: orange;
     background-color: black;
     max-width:650px;
+    margin-bottom: 20px;
 }
 
 .line-wrapper{
@@ -41,6 +50,7 @@ body{
     overflow-x: hidden;
     white-space: nowrap;
     overflow-x: scroll;
+    min-width:50px;
 }
 .data-right::-webkit-scrollbar {
     display: none;

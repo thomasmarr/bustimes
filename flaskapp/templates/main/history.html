@@ -1,0 +1,41 @@
+{% extends 'boilerplate.html' %} {% block content %}
+<div class="header">
+    <h3>
+        Bus Times Request History
+    </h3>
+</div>
+{% if requests|length > 0 %}
+{% for request in requests %}
+<div class="subheader-wrapper">
+    Requested {{request['request_date']}} at {{request['request_time']}}
+</div>
+<div class="data-wrapper">
+    {% if request['expected_arrivals']|length > 0 %}
+    {% for item in request['expected_arrivals'] %}
+    <div class="line-wrapper">
+        <div class="data-left">
+            {{item['line_name']}}
+        </div>
+        <div class="data-middle">
+            {{item['destination_name']}}
+        </div>
+        <div class="data-right">
+            {{item['expected_arrival_string']}}
+        </div>
+    </div>
+    {% endfor %}
+    {% else %}
+    <div class="data-middle">
+        No data...
+    </div>
+    {% endif %}
+</div>
+{% endfor %}
+{% else %}
+<div class="data-wrapper">
+    <div class="data-middle">
+        No history...
+    </div>
+</div>
+{% endif %}
+{% endblock %}

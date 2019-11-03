@@ -1,9 +1,8 @@
 from . import main_blueprint
 from flask import render_template
 from .api_calls import TfLAPICalls
-from .db_helpers import add_to_db
+from .db_helpers import add_to_db, get_history
 from datetime import datetime
-from dateutil.parser import isoparse
 
 @main_blueprint.route("/")
 def index():
@@ -18,3 +17,7 @@ def index():
             item['expectedArrivalString'] = str(item['expectedArrival'])+'m'
     sortedR = sorted(response, key=lambda item:item['expectedArrival'])
     return render_template("main/home.html", response = sortedR)
+
+@main_blueprint.route("/history")
+def history():
+    return render_template("main/history.html", requests = get_history())

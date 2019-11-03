@@ -55,3 +55,12 @@ body{
 .data-right::-webkit-scrollbar {
     display: none;
 }
+
+.error-wrapper{
+    padding: 15px;
+    margin: auto;
+    max-width: 650px;
+    font-size: large;
+    line-height:2;
+    color:whitesmoke;
+}

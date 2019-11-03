@@ -1,29 +1,33 @@
 {% extends 'boilerplate.html' %} {% block content %}
-<div class="header"><h3>
-Bus Times
-{% if response|length > 0 %}
-for {{response[0]['stationName']}}
-{% endif %}
-</h3></div>
-<div class="data-wrapper">
-    {% if response|length > 0 %}
-    {% for item in response %}
-    <div class="line-wrapper">
-        <div class="data-left">
-            {{item['lineName']}}
-        </div>
-        <div class="data-middle">
-            {{item['destinationName']}}
-        </div>
-        <div class="data-right">
-            {{item['expectedArrivalString']}}
-        </div>
+<div class="content-wrapper">
+    <p>Please enter an SMS stop code below.</p>
+    <form
+    action="{{ url_for('main.index') }}"
+    class="rates-input-form"
+    method="post"
+    >
+    <div class="input-field">
+    <input
+    id="smscode"
+    name="smscode"
+    type="number"
+    class="validate"
+    min="10000"
+    max="99999"
+    step="1"
+    />
+    <label for="smscode">Stop SMS Code</label>
     </div>
-    {% endfor %}
-    {% else %}
-    <div class="data-middle">
-        No data...
-    </div>
-    {% endif %}
+    <button
+    class="btn waves-effect waves-light purple lighten-2"
+    type="submit"
+    name="submit"
+    value="submit"
+    >
+    Submit
+    <i class="material-icons right">send</i>
+    </button>
+    </form>
+    <p class="subtle">Alternatively, please <a href="{{ url_for('main.live_arrivals_naptan', naptan_id='490009333W') }}">click here</a> for a demo using a fixed naptan ID.</p>
 </div>
 {% endblock %}

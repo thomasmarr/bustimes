@@ -7,7 +7,8 @@
 {% if requests|length > 0 %}
 {% for request in requests %}
 <div class="subheader-wrapper">
-    Requested {{request['request_date']}} at {{request['request_time']}}
+    Requested {{request['request_date']}} at {{request['request_time']}}<br>
+    {{request.station_name}}{% if request.platform_name != 'null' %}, {{request.platform_name}} {% endif %}
 </div>
 <div class="data-wrapper">
     {% if request['expected_arrivals']|length > 0 %}

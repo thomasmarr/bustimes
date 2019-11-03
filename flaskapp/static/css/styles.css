@@ -2,6 +2,15 @@ body{
     background-color:#32283c;
 }
 
+.content-wrapper{
+    max-width:650px;
+    margin:auto;
+    color: whitesmoke;
+    font-size: large;
+    line-height: 2;
+    padding:10px;
+}
+
 .header{
     color:whitesmoke;
     text-align:center;
@@ -56,11 +65,65 @@ body{
     display: none;
 }
 
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
+
+/* label color */
+.input-field label {
+    color: whitesmoke;
+}
+/* label focus color */
+.input-field input[type=number]:focus + label {
+    color: whitesmoke;
+}
+/* label underline focus color */
+.input-field input[type=number]:focus {
+    border-bottom: 1px solid whitesmoke;
+    box-shadow: 0 1px 0 0 whitesmoke;
+}
+/* valid color */
+.input-field input[type=number].valid {
+    border-bottom: 1px solid whitesmoke;
+    box-shadow: 0 1px 0 0 whitesmoke;
+}
+/* invalid color */
+.input-field input[type=number].invalid {
+    border-bottom: 1px solid whitesmoke;
+    box-shadow: 0 1px 0 0 whitesmoke;
+}
+/* icon prefix focus color */
+.input-field .prefix.active {
+    color: whitesmoke;
+}
+
+.input-field input[type=number]:not(.browser-default):focus:not([readonly])+label{
+    color: whitesmoke;
+}
+
+.input-field input[type=number]:not(.broswer-default):focus:not([readonly]){
+    border-bottom: 1px solid whitesmoke;
+    box-shadow: 0 1px 0 0 whitesmoke;
+}
+
+input{
+    color:whitesmoke;
+}
+
+.subtle{
+    color:darkgrey;
+}
+
+.subtle>a{
+    color:whitesmoke;
+}
+
 .error-wrapper{
     padding: 15px;
     margin: auto;
     max-width: 650px;
     font-size: large;
     line-height:2;
-    color:whitesmoke;
 }

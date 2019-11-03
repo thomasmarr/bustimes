@@ -18,4 +18,14 @@ class TfLAPICalls(object):
             abort(e.response.status_code, 'An error occurred while contacting TfL. ' + times.json()['message'])
         except:
             raise Exception()
-        
+    
+    def getNaptanIdBySmsCode(self, sms_code):
+        try:
+            stopPoint = requests.get(f'https://api.tfl.gov.uk/StopPoint/Sms/{sms_code}', params=self.keys)
+            stopPoint.raise_for_status()
+            return stopPoint.json()['naptanId']
+        except requests.exceptions.HTTPError as e:
+            print(e)
+            abort(e.response.status_code, 'An error occurred while contacting TfL. ' + stopPoint.json()['message'])
+        except:
+            raise Exception()

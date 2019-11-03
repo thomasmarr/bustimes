@@ -1,11 +1,14 @@
 {% extends 'boilerplate.html' %} {% block content %}
 {# This template receives an HTTP error code in an error_code parameter #}
-<h2>
-    Flask App
-</h2>
+<div class="error-wrapper">
+<h3>
+Oops...
+</h3>
+<p>It looks like something went wrong</p>
 {% if description %}
 {{description}}
 {% else %}
 <div>Sorry, there was an error. Code {{error_code}}</div>
 {% endif %}
+</div>
 {% endblock %}

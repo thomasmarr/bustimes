@@ -2,11 +2,12 @@ from .. import db
 from ..models import Request, ExpectedArrival
 from datetime import datetime
 
-def add_to_db(data):
+def add_to_db(data, stop_name):
     request_time = datetime.strptime(data[0]['timing']['sent'], '%Y-%m-%dT%H:%M:%SZ')
     station_name = data[0]['stationName']
     naptan_id = data[0]['naptanId']
-    req = Request(request_time = request_time, station_name = station_name, naptan_id = naptan_id)
+    platform_name = stop_name
+    req = Request(request_time = request_time, station_name = station_name, naptan_id = naptan_id, platform_name = platform_name)
     for item in data:
         exp_arr_time = datetime.strptime(item['expectedArrival'], '%Y-%m-%dT%H:%M:%SZ')
         exp_arrival = ExpectedArrival(expected_arrival = exp_arr_time, line_name = item['lineName'], destination_name = item['destinationName'], request_id=req.id)
@@ -33,6 +34,7 @@ def get_history():
         requests.append({
             'station_name':request.station_name,
             'naptan_id':request.naptan_id,
+            'platform_name':request.platform_name,
             'request_date':request.request_time.strftime("%d %b %Y"),
             'request_time':request.request_time.strftime("%H:%M"),
             'expected_arrivals':arr_sorted

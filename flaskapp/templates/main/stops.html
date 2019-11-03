@@ -1,0 +1,29 @@
+{% extends 'boilerplate.html' %} {% block content %}
+{% for stop in response %}
+<div class="content-wrapper"><div class="header"><h3>
+Bus Times for {{stop['common_name']}}{% if stop['stop_letter'] is not none %}, {{stop['stop_letter']}} {% endif %}
+</h3></div>
+<div class="data-wrapper">
+{% if stop['response']|length > 0 %}
+{% for item in stop['response'] %}
+<div class="line-wrapper">
+<div class="data-left">
+{{item['lineName']}}
+</div>
+<div class="data-middle">
+{{item['destinationName']}}
+</div>
+<div class="data-right">
+{{item['expectedArrivalString']}}
+</div>
+</div>
+{% endfor %}
+{% else %}
+<div class="data-middle">
+No data for that stop...
+</div>
+{% endif %}
+</div>
+{% endfor %}
+<p>This page can be bookmarked or saved to your home screen for easy access.</p></div>
+{% endblock %}

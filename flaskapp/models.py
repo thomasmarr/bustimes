@@ -6,6 +6,7 @@ class Request(db.Model):
     request_time = db.Column(db.DateTime, nullable=False)
     station_name = db.Column(db.String, nullable=False)
     naptan_id = db.Column(db.String, nullable=False)
+    platform_name = db.Column(db.String)
     expected_arrivals = db.relationship("ExpectedArrival", backref="request")
 
     def __repr__(self):

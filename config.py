@@ -10,6 +10,13 @@ class Config:
     SECRET_KEY = os.environ.get("SECRET_KEY")
     TFL_APP_ID = os.environ.get("TFL_APP_ID")
     TFL_API_KEY = os.environ.get("TFL_API_KEY")
+    MONGODB_SETTINGS = {
+        'db': os.environ.get('MONGO_INITDB_DATABASE'),
+        'host': os.environ.get('MONGODB_HOST'),
+        'username': os.environ.get('MONGO_INITDB_USERNAME'),
+        'password': os.environ.get('MONGO_INITDB_PASSWORD')
+    }
+
 
 
 class DevConfig(Config):

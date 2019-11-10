@@ -1,4 +1,3 @@
-from .. import db
 from ..models import Request, ExpectedArrival
 from datetime import datetime
 
@@ -10,16 +9,13 @@ def add_to_db(data, stop_name):
     req = Request(request_time = request_time, station_name = station_name, naptan_id = naptan_id, platform_name = platform_name)
     for item in data:
         exp_arr_time = datetime.strptime(item['expectedArrival'], '%Y-%m-%dT%H:%M:%SZ')
-        exp_arrival = ExpectedArrival(expected_arrival = exp_arr_time, line_name = item['lineName'], destination_name = item['destinationName'], request_id=req.id)
+        exp_arrival = ExpectedArrival(expected_arrival = exp_arr_time, line_name = item['lineName'], destination_name = item['destinationName'])
         req.expected_arrivals.append(exp_arrival)
-        db.session.add(exp_arrival)
-    db.session.add(req)
-    db.session.commit()
+    req.save()
 
 def get_history():
-    query = Request.query.order_by(Request.request_time.desc()).options(db.joinedload('expected_arrivals'))
     requests = []
-    for request in query:
+    for request in Request.objects:
         expected_arrivals = []
         for expected_arrival in request.expected_arrivals:
             exp_arriv = round((expected_arrival.expected_arrival-request.request_time).seconds/60)

@@ -1,23 +1,13 @@
-from . import db
+from . import mongodb
 
-class Request(db.Model):
-    __tablename__ = 'requests'
-    id = db.Column(db.Integer, primary_key=True)
-    request_time = db.Column(db.DateTime, nullable=False)
-    station_name = db.Column(db.String, nullable=False)
-    naptan_id = db.Column(db.String, nullable=False)
-    platform_name = db.Column(db.String)
-    expected_arrivals = db.relationship("ExpectedArrival", backref="request")
+class ExpectedArrival(mongodb.EmbeddedDocument):
+    expected_arrival = mongodb.DateTimeField(required=True)
+    line_name = mongodb.StringField()
+    destination_name = mongodb.StringField()
 
-    def __repr__(self):
-        return '<Request %r>' % self.id
-
-class ExpectedArrival(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    expected_arrival = db.Column(db.DateTime, nullable=False)
-    line_name = db.Column(db.String)
-    destination_name = db.Column(db.String)
-    request_id = db.Column(db.Integer, db.ForeignKey("requests.id"), nullable=False)
-
-    def __repr__(self):
-        return '<ExpectedArrival %r>' % self.id
+class Request(mongodb.Document):
+    request_time = mongodb.DateTimeField(required=True)
+    station_name = mongodb.StringField(required=True)
+    naptan_id = mongodb.StringField(required=True)
+    platform_name = mongodb.StringField()
+    expected_arrivals = mongodb.ListField(mongodb.EmbeddedDocumentField(ExpectedArrival))

@@ -10,14 +10,6 @@ services:
       - env_file
     networks:
       - mongodb_nw
-  db:
-    image: "postgres:12"
-    volumes:
-      - "busttimes_database:/var/lib/postgresql/data"
-    env_file:
-      - env_file
-    networks:
-      - db_nw
   flaskapp:
     build: .
     env_file:
@@ -26,12 +18,10 @@ services:
       - "8080:5000"
     volumes:
       - .:/home/flaskapp
-      - ./migrations:/home/flaskapp/migrations
     networks:
-      - db_nw
       - mongodb_nw
     depends_on:
-      - db
+      - mongodb
   client:
     build: ./client
     ports: 
@@ -42,10 +32,7 @@ services:
     depends_on:
       - flaskapp
 networks:
-  db_nw:
-    driver: bridge
   mongodb_nw:
     driver: bridge
 volumes:
-  busttimes_database:
   bustimes_mongodb:

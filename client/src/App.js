@@ -1,8 +1,9 @@
 import React from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 
 import Navbar from './components/Navbar'
 import LiveArrivals from './components/LiveArrivals'
+import Form from './components/Form'
 import History from './components/History'
 
 import { ThemeProvider } from 'styled-components'
@@ -19,11 +20,12 @@ const App = () => {
       <Router>
         <Navbar />
         <S.ContentWrapper>
-          <div>
-            React App
-        </div>
-          <Route path="/" exact component={LiveArrivals} />
-          <Route path="/history" component={History} />
+          <Switch>
+            <Route path="/" exact component={Form} />
+            <Route path="/history" component={History} />
+            <Route path="/livearrivals/:smscode" component={LiveArrivals} />
+            <Route path="/livearrivals" component={Form} />
+          </Switch>
         </S.ContentWrapper>
       </Router>
     </ThemeProvider>

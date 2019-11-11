@@ -30,6 +30,7 @@ const Form = (props) => {
                     <i className="material-icons right">send</i>
                 </S.Button>
             </form>
+            <S.SubtlePara>Alternatively, please <S.SubtleLink to="/livearrivals/naptan/490009333W">click here</S.SubtleLink> for a demo using a fixed naptan ID.</S.SubtlePara>
         </>
     )
 }

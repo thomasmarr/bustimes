@@ -3,16 +3,21 @@ from flask import jsonify
 from ..main.api_calls import TfLAPICalls
 from ..main.db_helpers import add_to_db
 from datetime import datetime
-import requests
+from werkzeug.exceptions import HTTPException
+
+class Errors: 
+    TFL_API_ERR = "There was a problem contacting TFL, please try again"
+    GENERIC_ERR = "An unknown error occurred while trying to contact TfL"
 
 @api_blueprint.route("/live-arrivals/<smscode>")
 def data(smscode):
     api = TfLAPICalls()
     try:
         stops = api.getStopsBySmsCode(smscode)
+    except HTTPException as e:
+        return(jsonify(error=Errors.TFL_API_ERR),e.get_response().status_code)
     except:
-        #TODO return the correct status code
-        return(jsonify(error='There was a problem contacting TFL, please try again'),429)
+        return(jsonify(error=Errors.GENERIC_ERR),500)
     naptan_ids = stops[0]
     stop_letters = stops[1]
     common_names = stops[2]
@@ -20,9 +25,10 @@ def data(smscode):
     for index, naptan_id in enumerate(naptan_ids):
         try:
             response = api.getStopLiveArrivals(naptan_id)
+        except HTTPException as e:
+            return(jsonify(error=Errors.TFL_API_ERR),e.get_response().status_code)
         except:
-            #TODO return the correct status code
-            return(jsonify(error='There was a problem contacting TFL, please try again'),429)
+            return(jsonify(error=Errors.GENERIC_ERR),500)
         filtered = list(filter(lambda item:item['modeName']=='bus', response))
         if len(filtered)>0:
             add_to_db(filtered, stop_letters[index])
@@ -49,9 +55,10 @@ def live_arrivals_naptan(naptan_id):
     api = TfLAPICalls()
     try:
         response = api.getStopLiveArrivals(naptan_id)
+    except HTTPException as e:
+        return(jsonify(error=Errors.TFL_API_ERR),e.get_response().status_code)
     except:
-        #TODO return the correct status code
-        return(jsonify(error='There was a problem contacting TFL, please try again'),429)
+        return(jsonify(error=Errors.GENERIC_ERR),500)
     if len(response)>0:
         add_to_db(response, response[0]['platformName'])
         for item in response:

@@ -1,5 +1,5 @@
 from flask import current_app
-from werkzeug.exceptions import abort, TooManyRequests
+from werkzeug.exceptions import abort, TooManyRequests, NotFound
 import requests
 
 class TfLAPICalls(object):
@@ -17,6 +17,8 @@ class TfLAPICalls(object):
             print(e)
             if e.response.status_code == 429:
                 raise TooManyRequests()
+            elif e.response.status_code == 404:
+                raise NotFound()
             else:
                 abort(e.response.status_code, 'An error occurred while contacting TfL. ' + times.json()['message'])
         except:
@@ -38,6 +40,8 @@ class TfLAPICalls(object):
             print(e)
             if e.response.status_code == 429:
                 raise TooManyRequests()
+            elif e.response.status_code == 404:
+                raise NotFound()
             else:
                 abort(e.response.status_code, 'An error occurred while contacting TfL. ' + times.json()['message'])
         except:

@@ -3,12 +3,13 @@ from flask import jsonify
 from ..main.api_calls import TfLAPICalls
 from ..main.db_helpers import add_to_db
 from datetime import datetime
-from werkzeug.exceptions import HTTPException, TooManyRequests
+from werkzeug.exceptions import HTTPException, TooManyRequests, NotFound
 
 class Errors: 
-    TFL_API_ERR = "There was a problem contacting TFL, please try again"
+    TFL_API_ERR = "There was a problem contacting TFL, please try again."
     TOO_MANY_REQ_ERR = "You have submitted too many requests. Please wait 10 mins before retrying."
-    GENERIC_ERR = "An unknown error occurred while trying to contact TfL"
+    GENERIC_ERR = "An unknown error occurred while trying to contact TfL."
+    NOT_FOUND_ERR = "TfL could not find that resource."
 
 @api_blueprint.route("/live-arrivals/<smscode>")
 def data(smscode):
@@ -17,6 +18,8 @@ def data(smscode):
         stops = api.getStopsBySmsCode(smscode)
     except TooManyRequests as e:
         return(jsonify(error=Errors.TOO_MANY_REQ_ERR),e.get_response().status_code)
+    except NotFound as e:
+        return(jsonify(error=Errors.NOT_FOUND_ERR),e.get_response().status_code)
     except HTTPException as e:
         return(jsonify(error=Errors.TFL_API_ERR),e.get_response().status_code)
     except:
@@ -30,6 +33,8 @@ def data(smscode):
             response = api.getStopLiveArrivals(naptan_id)
         except TooManyRequests as e:
             return(jsonify(error=Errors.TOO_MANY_REQ_ERR),e.get_response().status_code)
+        except NotFound as e:
+            return(jsonify(error=Errors.NOT_FOUND_ERR),e.get_response().status_code)
         except HTTPException as e:
             return(jsonify(error=Errors.TFL_API_ERR),e.get_response().status_code)
         except:
@@ -62,6 +67,8 @@ def live_arrivals_naptan(naptan_id):
         response = api.getStopLiveArrivals(naptan_id)
     except TooManyRequests as e:
         return(jsonify(error=Errors.TOO_MANY_REQ_ERR),e.get_response().status_code)
+    except NotFound as e:
+        return(jsonify(error=Errors.NOT_FOUND_ERR),e.get_response().status_code)
     except HTTPException as e:
         return(jsonify(error=Errors.TFL_API_ERR),e.get_response().status_code)
     except:

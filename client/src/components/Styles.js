@@ -102,3 +102,30 @@ export const SubtleLink = styled(Link)`
         color:${props => props.theme.subtleLinkFontColor};
     }
 `
+
+export const ErrorBox = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 80%;
+    flex-direction: column
+`
+
+export const LoadingWheel = styled.div`
+    margin:30px auto;
+    height: 150px;
+    width: 150px;
+    animation: rotate 0.8s infinite linear;
+    border: 1px solid #aaa;
+    border-right-color: transparent;
+    border-radius: 50%;
+    z-index: -10;
+    @keyframes rotate {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+`

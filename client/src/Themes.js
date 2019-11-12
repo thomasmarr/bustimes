@@ -9,5 +9,6 @@ export const PurpleTheme = {
     dataBgColor: 'black',
     headerFontColor: 'whitesmoke',
     subtleFontColor: 'darkgrey',
-    subtleLinkFontColor: 'whitesmoke'
+    subtleLinkFontColor: 'whitesmoke',
+    subheaderFontColor: 'papayawhip'
 }

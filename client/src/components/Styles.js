@@ -49,6 +49,8 @@ export const Button = styled.button`
     }
 `
 
+//Arrivals styles
+
 export const DataWrapper = styled.div`
     margin: auto;
     font-family: '${props => props.theme.dataFont}', Arial, sans-serif;
@@ -88,6 +90,8 @@ export const DataRight = styled.div`
     }
 `
 
+//General Styles
+
 export const Header = styled.h4`
     color:${props => props.theme.headerFontColor};
     ext-align:center;
@@ -101,8 +105,27 @@ export const SubtleLink = styled(Link)`
     &&& {
         color:${props => props.theme.subtleLinkFontColor};
     }
+
+`
+export const PageHeader = styled.div`
+    color:${props => props.theme.headerFontColor};
+    text-align:center;
 `
 
+export const SubHeader = styled.div`
+    font-size: 20px;
+    color: ${props => props.theme.subheaderFontColor};
+    margin: auto;
+    max-width: 650px;
+    padding: 5px;
+`
+
+export const Message = styled.div`
+    text-align:center;
+    margin-top:30px;
+`
+
+//Error styles
 export const ErrorBox = styled.div`
     display: flex;
     align-items: center;
@@ -110,6 +133,8 @@ export const ErrorBox = styled.div`
     height: 80%;
     flex-direction: column
 `
+
+//Loading styles
 
 export const LoadingWheel = styled.div`
     margin:30px auto;

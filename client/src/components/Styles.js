@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 
 //Form Styles
 
-export const inputField = styled.div`
+export const InputField = styled.div`
     label {
         color: ${props => props.theme.primaryFontColor};
     }
@@ -22,6 +22,11 @@ export const inputField = styled.div`
         border-bottom: 1px solid ${props => props.theme.inputBorderColor};
         box-shadow: 0 1px 0 0 ${props => props.theme.inputShadowColor};
     }
+    input[type=number]::-webkit-inner-spin-button, 
+    input[type=number]::-webkit-outer-spin-button { 
+    -webkit-appearance: none; 
+    margin: 0; 
+    }
     .prefix.active {
         color: ${props => props.theme.primaryFontColor};
     }
@@ -39,7 +44,9 @@ export const Input = styled.input`
 `
 
 export const Button = styled.button`
-    background-color: ${props => props.theme.btnColor};
+    &&& {
+        background-color: ${props => props.theme.btnColor};
+    }
 `
 
 export const DataWrapper = styled.div`

@@ -11,7 +11,7 @@ const Form = (props) => {
                 e.preventDefault()
                 props.history.push(`/livearrivals/${input}`)
             }}>
-                <S.inputField className="input-field">
+                <S.InputField className="input-field">
                     <S.Input
                         id="smscode"
                         name="smscode"
@@ -24,7 +24,7 @@ const Form = (props) => {
                         onChange={e => setInput(e.target.value)}
                     />
                     <label htmlFor="smscode">Stop SMS Code</label>
-                </S.inputField>
+                </S.InputField>
                 <S.Button type="submit" className="btn waves-effect waves-light">
                     Submit
                     <i className="material-icons right">send</i>

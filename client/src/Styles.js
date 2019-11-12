@@ -14,3 +14,16 @@ export const ContentWrapper = styled.div`
     line-height: 2;
     padding:10px;
 `
+
+export const ThemeButton = styled.button`
+    &&& {
+        background-color: ${props => props.theme.themeBtnColor};
+    }
+    position: fixed;
+    bottom: 15px;
+    right: 15px;
+    border-radius: 50%;
+    height: 50px;
+    width: 50px;
+    line-height: 0.9;
+`

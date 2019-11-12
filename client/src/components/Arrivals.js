@@ -3,11 +3,13 @@ import React from 'react'
 import * as S from './Styles'
 
 const Arrivals = ({ arrivals }) => {
+    const requested = arrivals.request_time ? 'Requested ' + arrivals.request_date + ' at ' + arrivals.request_time : null
     return (<>
-        <S.Header>
+        <S.SubHeader>
+            {requested ? (<>{requested}<br/></>) : null}
             {arrivals.common_name}
-            {arrivals.stop_letter}
-        </S.Header>
+            {arrivals.stop_letter ? (<>, {arrivals.stop_letter}</>) : null}
+        </S.SubHeader>
         <S.DataWrapper>
             {arrivals.arrivals.length > 0 ? arrivals.arrivals.map((arrival, index) => {
                 return (

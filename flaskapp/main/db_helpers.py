@@ -21,18 +21,18 @@ def get_history():
             exp_arriv = round((expected_arrival.expected_arrival-request.request_time).seconds/60)
             expected_arrival_string = str(exp_arriv)+'m'
             expected_arrivals.append({
-                'line_name':expected_arrival.line_name,
-                'destination_name':expected_arrival.destination_name,
-                'expected_arrival_string':expected_arrival_string,
+                'lineName':expected_arrival.line_name,
+                'destinationName':expected_arrival.destination_name,
+                'expectedArrival':expected_arrival_string,
                 'expected_arrival_number':exp_arriv
             })
         arr_sorted = sorted(expected_arrivals, key=lambda item:item['expected_arrival_number'])
         requests.append({
-            'station_name':request.station_name,
+            'common_name':request.station_name,
             'naptan_id':request.naptan_id,
-            'platform_name':request.platform_name,
+            'stop_letter':request.platform_name,
             'request_date':request.request_time.strftime("%d %b %Y"),
             'request_time':request.request_time.strftime("%H:%M"),
-            'expected_arrivals':arr_sorted
+            'arrivals':arr_sorted
         })
     return requests

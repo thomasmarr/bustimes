@@ -1,7 +1,7 @@
 from . import api_blueprint
 from flask import jsonify
 from ..main.api_calls import TfLAPICalls
-from ..main.db_helpers import add_to_db
+from ..main.db_helpers import add_to_db, get_history
 from datetime import datetime
 from werkzeug.exceptions import HTTPException, TooManyRequests, NotFound
 
@@ -92,3 +92,8 @@ def live_arrivals_naptan(naptan_id):
             "arrivals":arrivals
         }
     ])
+
+@api_blueprint.route("/get-history")
+def gethistory():
+    history = get_history()
+    return jsonify(history)

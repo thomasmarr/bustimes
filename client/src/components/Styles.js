@@ -154,3 +154,10 @@ export const LoadingWheel = styled.div`
         }
       }
 `
+
+//Nav styles
+
+export const NavWrap = styled.div`
+    background-color: ${props => props.theme.navBgColor};
+    color: ${props => props.theme.navFontColor};
+`

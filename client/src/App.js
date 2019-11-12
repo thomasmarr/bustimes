@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 
 import Navbar from './components/Navbar'
@@ -8,9 +8,19 @@ import NotFound from './components/NotFound'
 
 import { ThemeProvider } from 'styled-components'
 import * as S from './Styles'
-import { PurpleTheme } from './Themes'
+import { PurpleTheme, LightTheme } from './Themes'
 
 const App = () => {
+  const [theme, setTheme] = useState(PurpleTheme)
+
+  const toggleTheme = () => {
+    if (theme === PurpleTheme) {
+      setTheme(LightTheme)
+    } else {
+      setTheme(PurpleTheme)
+    }
+  }
+
   const renderFromNaptan = (props) => {
     return <DataRenderer {...props} url={`http://localhost:8080/api/live-arrivals/naptan/${props.match.params.naptanid}`} title="Live Bus Arrival Times" />
   }
@@ -21,7 +31,7 @@ const App = () => {
     return <DataRenderer {...props} url={`http://localhost:8080/api/get-history`} title="Bus Times Request History" />
   }
   return (
-    <ThemeProvider theme={PurpleTheme}>
+    <ThemeProvider theme={theme}>
       <S.Global />
       <Router>
         <Navbar />
@@ -36,6 +46,12 @@ const App = () => {
           </Switch>
         </S.ContentWrapper>
       </Router>
+      <S.ThemeButton className="btn-floating btn-large waves-effect waves-light" onClick={toggleTheme}>
+        {theme === PurpleTheme ? 
+          (<i class="material-icons">wb_sunny</i>)
+          :
+          (<i class="material-icons">brightness_3</i>)}
+      </S.ThemeButton>
     </ThemeProvider>
   );
 }

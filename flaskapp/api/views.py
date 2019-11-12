@@ -3,10 +3,11 @@ from flask import jsonify
 from ..main.api_calls import TfLAPICalls
 from ..main.db_helpers import add_to_db
 from datetime import datetime
-from werkzeug.exceptions import HTTPException
+from werkzeug.exceptions import HTTPException, TooManyRequests
 
 class Errors: 
     TFL_API_ERR = "There was a problem contacting TFL, please try again"
+    TOO_MANY_REQ_ERR = "You have submitted too many requests. Please wait 10 mins before retrying."
     GENERIC_ERR = "An unknown error occurred while trying to contact TfL"
 
 @api_blueprint.route("/live-arrivals/<smscode>")
@@ -14,6 +15,8 @@ def data(smscode):
     api = TfLAPICalls()
     try:
         stops = api.getStopsBySmsCode(smscode)
+    except TooManyRequests as e:
+        return(jsonify(error=Errors.TOO_MANY_REQ_ERR),e.get_response().status_code)
     except HTTPException as e:
         return(jsonify(error=Errors.TFL_API_ERR),e.get_response().status_code)
     except:
@@ -25,6 +28,8 @@ def data(smscode):
     for index, naptan_id in enumerate(naptan_ids):
         try:
             response = api.getStopLiveArrivals(naptan_id)
+        except TooManyRequests as e:
+            return(jsonify(error=Errors.TOO_MANY_REQ_ERR),e.get_response().status_code)
         except HTTPException as e:
             return(jsonify(error=Errors.TFL_API_ERR),e.get_response().status_code)
         except:
@@ -55,6 +60,8 @@ def live_arrivals_naptan(naptan_id):
     api = TfLAPICalls()
     try:
         response = api.getStopLiveArrivals(naptan_id)
+    except TooManyRequests as e:
+        return(jsonify(error=Errors.TOO_MANY_REQ_ERR),e.get_response().status_code)
     except HTTPException as e:
         return(jsonify(error=Errors.TFL_API_ERR),e.get_response().status_code)
     except:

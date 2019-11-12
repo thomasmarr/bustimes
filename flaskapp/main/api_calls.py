@@ -1,5 +1,5 @@
 from flask import current_app
-from werkzeug.exceptions import abort
+from werkzeug.exceptions import abort, TooManyRequests
 import requests
 
 class TfLAPICalls(object):
@@ -15,7 +15,10 @@ class TfLAPICalls(object):
             return times.json()
         except requests.exceptions.HTTPError as e:
             print(e)
-            abort(e.response.status_code, 'An error occurred while contacting TfL. ' + times.json()['message'])
+            if e.response.status_code == 429:
+                raise TooManyRequests()
+            else:
+                abort(e.response.status_code, 'An error occurred while contacting TfL. ' + times.json()['message'])
         except:
             raise Exception()
 
@@ -33,6 +36,9 @@ class TfLAPICalls(object):
             return [naptanIds, stopNames, commonNames]
         except requests.exceptions.HTTPError as e:
             print(e)
-            abort(e.response.status_code, 'An error occurred while contacting TfL. ' + stopPoint.json()['message'])
+            if e.response.status_code == 429:
+                raise TooManyRequests()
+            else:
+                abort(e.response.status_code, 'An error occurred while contacting TfL. ' + times.json()['message'])
         except:
             raise Exception()

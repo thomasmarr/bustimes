@@ -11,9 +11,6 @@ import * as S from './Styles'
 import { PurpleTheme } from './Themes'
 
 const App = () => {
-  const data = fetch('http://localhost:8080/api/data')
-    .then(response => response.json())
-    .then(json => console.log('👌', json))
   return (
     <ThemeProvider theme={PurpleTheme}>
       <S.Global />
@@ -23,6 +20,7 @@ const App = () => {
           <Switch>
             <Route path="/" exact component={Form} />
             <Route path="/history" component={History} />
+            <Route path="/livearrivals/naptan/:naptanid" exact component={LiveArrivals} />
             <Route path="/livearrivals/:smscode" component={LiveArrivals} />
             <Route path="/livearrivals" component={Form} />
           </Switch>

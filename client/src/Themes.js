@@ -3,5 +3,11 @@ export const PurpleTheme = {
     primaryFontColor: 'whitesmoke',
     inputBorderColor: 'whitesmoke',
     inputShadowColor: 'whitesmoke',
-    btnColor: '#ba68c8'
+    btnColor: '#ba68c8',
+    dataFont: 'bpdotsbold',
+    dataFontColor: 'orange',
+    dataBgColor: 'black',
+    headerFontColor: 'whitesmoke',
+    subtleFontColor: 'darkgrey',
+    subtleLinkFontColor: 'whitesmoke'
 }
